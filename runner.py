@@ -36,6 +36,7 @@ class Runner:
 
     def Login(self):
         self.driver.get('https://www.linkedin.com')
+        self.driver.implicitly_wait(3)
         
         username = self.driver.find_element(By.ID,'session_key')
         username.send_keys(config['USERNAME'])
@@ -98,5 +99,18 @@ class Runner:
         
         print('Stored Data!')
         
+    
+    def scapeLink(self, link, name, company):
+        self.driver.get(link)
+        self.driver.implicitly_wait(2)
+        status = ScraperService.ScrapeID(driver=self.driver, companyName=company, Name=name)
+        
+        if status == False:
+            self.falseList.append({
+                'link': link,
+                'name' : name,
+                'company' : company
+            })
+        pass
         
         

@@ -1,26 +1,33 @@
 from dotenv import load_dotenv
 import pandas as pd
+from rich import pretty
 
+pretty.install()
 load_dotenv()
 
 from runner import Runner
+from shell import SHELL
 
 instance = Runner.get_instance()
 
-instance.RUN()
+shellInstance = SHELL.get_instance()
 
-instance.Login()
+shellInstance.startSession()
 
-path = input("After login, enter your scrape excel file name")
+# instance.RUN()
 
-print(f'Defining Data...')
+# instance.Login()
 
-instance.DefineData(path=path)
+# path = input("After login, enter your scrape excel file name")
 
-start = input('Press S to start');
+# print(f'Defining Data...')
 
-if start == 'S':
-    instance.startScrape()
+# instance.DefineData(path=path)
+
+# start = input('Press S to start');
+
+# if start == 'S':
+#     instance.startScrape()
 
 
 while(True):
