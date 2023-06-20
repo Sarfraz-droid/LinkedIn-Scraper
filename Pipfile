@@ -8,6 +8,12 @@ selenium = "*"
 python-dotenv = "*"
 pandas = "*"
 rich = "*"
+pathlib = "*"
+tk = "*"
+beautifulsoup4 = "*"
+lxml = "*"
+fuzzywuzzy = "*"
+python-levenshtein = "*"
 
 [dev-packages]
 

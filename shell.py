@@ -6,7 +6,8 @@ from runner import Runner
 options = [
     '[1] : Start Session',
     '[2] : Verify LinkedIn & Find Emails',
-    '[3] : Scan Through CSV and Verify'
+    '[3] : Scan Through CSV and Verify',
+    '[4] : Export InValid Data'
 ]
 
 console = Console()
@@ -29,7 +30,11 @@ class SHELL:
             SHELL.__instance = self
 
     def Repeat(self):
-        self.Input()
+        restart = console.input(prompt="Do you want to restart?[Y/N]").lower()
+        if restart == 'y':
+            self.Input()
+        else:
+            exit()
         pass
 
     def startSession(self):
@@ -39,32 +44,36 @@ class SHELL:
         pass
     
     def InitSession(self):
-        print("Init Session")
-    
+        rprint('\n\nOpening Selenium...')    
         self.runner.RUN()        
+        rprint('\n\nLogging In')
         self.runner.Login()
+        
         self.Repeat()
         pass
     
     def VerifyLinkedInID(self):
+        [link,company,name] = self.runner.defineSingleData()
         
-        link = console.input(prompt=f'Enter Linkedin Link')
-        company = console.input(prompt=f'Enter Company Name')
-        name = console.input(prompt=f'Enter your name')
-        
-        self.runner.scapeLink(company=company,name=name, link=link)
+        self.runner.scrapeLink(company=company,name=name, link=link)
         pass
     
-    def ScanCSV(self):
-        path = console.input(prompt=f'Enter File Path')
-        
-        self.runner.DefineData(path=path)
+    def ScanCSV(self):        
+        self.runner.defineCSVData()
         self.runner.startScrape()
         
+        self.Repeat()
+        
+        pass
+    
+    def ExportData(self):
+        self.runner.exportData()
+        
+        self.Repeat()
         pass
 
     def Input(self):
-        
+        console.clear()
         logo = '''
  _      _       _            _ _____          _____                                
 | |    (_)     | |          | |_   _|        / ____|                               
@@ -85,7 +94,6 @@ class SHELL:
         
         match value:
             case 1:
-                print('Value')
                 self.InitSession()              
                 pass
 
@@ -95,7 +103,10 @@ class SHELL:
             
             case 3: 
                 self.ScanCSV()
-                pass    
+                pass   
+        
+            case 4:
+                self.ExportData()
     
             case _:
                 pass
