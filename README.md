@@ -1,7 +1,7 @@
+------ IN DEVELOPMENT --------
 # LinkedIn-Scraper
 Simple Selenium Scraper to Verify Recruiters data &amp; their LinkedIn from databases.
 
------- WORK IN PROGRESS --------
 
 ## Setup
 
