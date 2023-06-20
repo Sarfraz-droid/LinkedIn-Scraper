@@ -16,5 +16,5 @@ Run the scraper by
 `python3 main.py`
 
 TODO : 
-[ ] - Code Cleaning
-[ ] - Fuzzy Company Search
+- [ ] Code Cleaning
+- [ ] Fuzzy Company Search
