@@ -7,14 +7,15 @@ from console import console
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
+import time
 
 class ScraperService:
     
     @staticmethod
     def ScrapeID(driver: webdriver.Chrome, companyName: str, Name: str):
         try:
-            WebDriverWait(driver, timeout=15).until(lambda d : d.find_element(By.CLASS_NAME,'pvs-list') or d.find_element(By.CLASS_NAME,'not-found__container') )
-            
+            # WebDriverWait(driver, timeout=15).until(lambda d : d.find_element(By.CLASS_NAME,'pvs-list') or d.find_element(By.CLASS_NAME,'not-found__container') )
+            time.sleep(10)
             name = str(Name).lower()
             html = driver.page_source
             

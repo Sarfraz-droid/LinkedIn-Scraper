@@ -118,7 +118,7 @@ class Runner:
         try:
         # if True:
             self.driver.get(link)
-            self.driver.implicitly_wait(6)
+            self.driver.implicitly_wait(20)
             status = ScraperService.ScrapeID(driver=self.driver, companyName=company, Name=name)
             
             if status == False:
