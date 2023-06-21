@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from pathlib import Path
 import pandas as pd
 from rich import print as rprint
 from console import console
@@ -14,7 +13,6 @@ class ScraperService:
     @staticmethod
     def ScrapeID(driver: webdriver.Chrome, companyName: str, Name: str):
         try:
-            # console.print(f'Current URL : [link]{driver.current_url}[/link]')
             WebDriverWait(driver, timeout=15).until(lambda d : d.find_element(By.CLASS_NAME,'pvs-list') or d.find_element(By.CLASS_NAME,'not-found__container') )
             
             name = str(Name).lower()
@@ -33,7 +31,7 @@ class ScraperService:
          
             name_ratio = fuzz.ratio(el.text.lower(),name);    
             
-            if name_ratio < 80:
+            if name_ratio < 70:
                 console.print('[red] Name is invalid[/red]')
                 return False
             
@@ -59,15 +57,13 @@ class ScraperService:
                 
             if verified_link is False:
                 console.print('[red]Company is invalid[/red]')
-            
-        
-        
+                
             return verified_link
         except:
             console.print("[red]Error Occurred[/red]")
             return False
     
-    def storeCSV(data: list, columns: list, path: Path) -> None:
+    def storeCSV(data: list, columns: list, path: str) -> None:
         try:
             console.print(f'[italic]Exporting Invalid Data List....[/italic] as {path}')
             df = pd.DataFrame(data, columns=columns)        

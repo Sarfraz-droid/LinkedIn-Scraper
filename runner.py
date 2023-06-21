@@ -3,10 +3,8 @@ from selenium.webdriver.chrome.options import Options
 import time
 from dotenv import dotenv_values
 from selenium.webdriver.common.by import By
-import numpy as np
 import pandas as pd
 from scraper import ScraperService
-from pathlib import Path
 from rich.console import Console
 import datetime
 
@@ -84,10 +82,9 @@ class Runner:
     def defineCSVData(self):
         console.print('[bold]NOTE : your file path must be relative to the [italic]assets/[/italic] folder[/bold]')
         _path = console.input('Enter your File Name: ')
-        self.path = Path(f'./assets/{_path}')
+        self.path = f'./assets/{_path}'
         self.df = pd.read_csv(self.path)
         self.data = self.df.to_numpy()
-        # self.data = np.delete(self.data,0,axis=0)
         self.columns = self.df.columns.values.tolist()
         
         cl= list(self.df.columns.values)
@@ -115,7 +112,7 @@ class Runner:
         print('Stored Data!')
         
     def exportData(self):
-        ScraperService.storeCSV(self.falseList, ['LinkedIn','Name','Company'], Path(f'./out/false_list_{datetime.datetime.now().strftime("%m_%d_%Y_%H_%M_%S")}.csv'))
+        ScraperService.storeCSV(self.falseList, ['LinkedIn','Name','Company'], f'./out/false_list_{datetime.datetime.now().strftime("%m_%d_%Y_%H_%M_%S")}.csv')
     
     def scrapeLink(self, link, name, company):
         try:
